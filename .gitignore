@@ -1,15 +1,17 @@
-# Binaries for programs and plugins
-*.exe
-*.exe~
+.idea/
+.DS_Store
+accounts-statistics-tool
+
+# Compiled source #
+###################
+*.com
+*.class
 *.dll
+*.exe
+*.o
 *.so
-*.dylib
 
-# Test binary, built with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
+# Logs #
+###################
 *.out
-
-# Dependency directories (remove the comment below to include it)
-# vendor/
+*.txt
