@@ -17,6 +17,9 @@ ENV SENDER_EMAIL=$sender_email
 ARG receiver_email
 ENV RECEIVER_EMAIL=$receiver_email
 
+ARG aws_region
+ENV AWS_REGION=$aws_region
+
 WORKDIR /app
 COPY . .
 RUN make
