@@ -125,3 +125,22 @@ func createTransactionsSlice() *[]models.Transaction {
 	// Return the transactions slice.
 	return &transactions
 }
+
+func TestImpl_ShutDown(t *testing.T) {
+
+	mockCtrl := gomock.NewController(t)
+	defer mockCtrl.Finish()
+
+	mClient := m.NewMockTransactionClient(mockCtrl)
+
+	svc := &Impl{
+		transactionClient: mClient,
+	}
+
+	c.Convey("Verify db is shutdown on application shutdown", t, func() {
+
+		mClient.EXPECT().Shutdown().Times(1)
+
+		svc.Shutdown()
+	})
+}

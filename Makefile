@@ -19,7 +19,7 @@ fmt:
 
 .PHONY: build
 build: fmt
-	go build
+	go build -o ./$(bin)
 
 .PHONY: test
 test: test-unit
@@ -37,8 +37,7 @@ clean:
 package:
 	$(eval tmpdir := $(shell mktemp -d build-XXXXXXXXXX))
 	cp ./$(bin) $(tmpdir)
-	cp ./start.sh $(tmpdir)
-	cd $(tmpdir) && zip -r ../$(bin)-$(version).zip $(bin) start.sh
+	cd $(tmpdir) && zip -r ../$(bin)-$(version).zip $(bin)
 	rm -rf $(tmpdir)
 
 .PHONY: dist

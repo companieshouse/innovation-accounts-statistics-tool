@@ -13,30 +13,32 @@ import (
 )
 
 const (
-	subject   = "Small Full Accounts Statistics"
-	body      = "<h1>SFA Stats</h1><p>Attached is the CSV of the stats</p>"
-	awsRegion = "eu-west-1"
+	subject = "Accounts Statistics - CIC filers who also provided small full accounts"
+	body    = "<h1>SFA Stats</h1><p>Attached is the CSV of statistics relating to CIC filers who also filed a set of small full accounts.</p>"
 )
 
 // EmailGenerator provides an interface by which to interact with aws emails.
 type EmailGenerator interface {
-	GenerateEmail(csv *models.CSV, cfg *c.Config) error
+	GenerateEmail(csv *models.CSV) error
 }
 
 // Impl is a concrete implementation of the EmailGenerator interface.
 type Impl struct {
+	cfg *c.Config
 }
 
 // NewEmailGenerator returns a new EmailGenerator interface implementation.
-func NewEmailGenerator() EmailGenerator {
-	return &Impl{}
+func NewEmailGenerator(cfg *c.Config) EmailGenerator {
+	return &Impl{
+		cfg: cfg,
+	}
 }
 
 // GenerateEmail is a method used to send an email using amazon's Golang sdk.
-func (eg *Impl) GenerateEmail(csv *models.CSV, cfg *c.Config) error {
+func (eg *Impl) GenerateEmail(csv *models.CSV) error {
 
 	sess, err := session.NewSession(&amaws.Config{
-		Region: amaws.String(awsRegion)},
+		Region: amaws.String(eg.cfg.AwsRegion)},
 	)
 	if err != nil {
 		return err
@@ -45,8 +47,8 @@ func (eg *Impl) GenerateEmail(csv *models.CSV, cfg *c.Config) error {
 	svc := ses.New(sess)
 
 	msg := gomail.NewMessage()
-	msg.SetHeader("From", cfg.SenderEmail)
-	msg.SetHeader("To", cfg.ReceiverEmail)
+	msg.SetHeader("From", eg.cfg.SenderEmail)
+	msg.SetHeader("To", eg.cfg.ReceiverEmail)
 	msg.SetHeader("Subject", subject)
 
 	msg.SetBody("text/html", body)

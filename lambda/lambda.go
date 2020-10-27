@@ -10,6 +10,7 @@ import (
 // Lambda facilitates the execution of Company Accounts statistics retrieval.
 type Lambda struct {
 	Service service.Service
+	cfg     *config.Config
 }
 
 type jsonBody struct{}
@@ -18,6 +19,7 @@ type jsonBody struct{}
 func New(cfg *config.Config) *Lambda {
 	return &Lambda{
 		Service: service.NewService(cfg),
+		cfg:     cfg,
 	}
 }
 
@@ -26,17 +28,13 @@ func (lambda *Lambda) Execute(j *jsonBody) error {
 
 	srCSV := lambda.Service.GetStatisticsReport("CIC report and full accounts")
 
-	eg := aws.NewEmailGenerator()
+	eg := aws.NewEmailGenerator(lambda.cfg)
 
-	cfg, err := config.Get()
+	err := eg.GenerateEmail(srCSV)
 	if err != nil {
 		log.Error(err.Error())
 	}
 
-	err = eg.GenerateEmail(srCSV, cfg)
-	if err != nil {
-		log.Error(err.Error())
-	}
-
+	lambda.Service.Shutdown()
 	return nil
 }

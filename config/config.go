@@ -16,6 +16,7 @@ type Config struct {
 	LogLevel                    string `env:"LOG_LEVEL"                      flag:"log-level"                      flagDesc:"Logging level of the application"`
 	SenderEmail                 string `env:"SENDER_EMAIL"                   flag:"sender-email"                   flagDesc:"Email of Sender"`
 	ReceiverEmail               string `env:"RECEIVER_EMAIL"                 flag:"receiver-email"                 flagDesc:"Email of Receiver"`
+	AwsRegion                   string `env:"AWS_REGION"                     flag:"aws-region"                     flagDesc:"AWS Region"`
 }
 
 var cfg *Config
@@ -58,6 +59,11 @@ func Get() (*Config, error) {
 
 	if cfg.ReceiverEmail == "" {
 		log.Warn("RECEIVER_EMAIL not set in environment")
+		mandatoryConfigsMissing = true
+	}
+
+	if cfg.AwsRegion == "" {
+		log.Warn("AWS_REGION not set in environment")
 		mandatoryConfigsMissing = true
 	}
 

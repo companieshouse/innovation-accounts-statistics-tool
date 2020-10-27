@@ -1,6 +1,6 @@
 FROM golang:1.12-alpine
 
-RUN apk add --no-cache git
+RUN apk add --no-cache git make
 
 ARG transactions_mongodb_url
 ENV TRANSACTIONS_MONGODB_URL=$transactions_mongodb_url

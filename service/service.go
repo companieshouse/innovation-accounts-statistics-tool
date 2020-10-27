@@ -17,6 +17,7 @@ const csvFileSuffix = ".csv"
 // Service provides an interface to retrieve statistics in a CSV format.
 type Service interface {
 	GetStatisticsReport(dataDescription string) *models.CSV
+	Shutdown()
 }
 
 // Impl is a concrete implementation of the Service interface.
@@ -48,6 +49,11 @@ func (s *Impl) GetStatisticsReport(dataDescription string) *models.CSV {
 	csv := constructCSV(sr)
 
 	return &csv
+}
+
+// Shutdown calls the mongo client implementation of the method.
+func (s *Impl) Shutdown() {
+	s.transactionClient.Shutdown()
 }
 
 // sortTransactionsPerMonth takes a slice of Transaction and groups them by the following criteria:
