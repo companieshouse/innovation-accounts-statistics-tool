@@ -2,8 +2,8 @@ package service
 
 import (
 	"errors"
-	m "github.com/amoriartyCH/accounts-statistics-tool/db/mocks"
-	"github.com/amoriartyCH/accounts-statistics-tool/models"
+	m "github.com/companieshouse/innovation-accounts-statistics-tool/db/mocks"
+	"github.com/companieshouse/innovation-accounts-statistics-tool/models"
 	"github.com/golang/mock/gomock"
 	c "github.com/smartystreets/goconvey/convey"
 	"testing"

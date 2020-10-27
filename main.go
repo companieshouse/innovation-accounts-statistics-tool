@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/amoriartyCH/accounts-statistics-tool/config"
-	"github.com/amoriartyCH/accounts-statistics-tool/lambda"
 	lam "github.com/aws/aws-lambda-go/lambda"
+	"github.com/companieshouse/innovation-accounts-statistics-tool/config"
+	"github.com/companieshouse/innovation-accounts-statistics-tool/lambda"
 	log "github.com/sirupsen/logrus"
 	"os"
 )

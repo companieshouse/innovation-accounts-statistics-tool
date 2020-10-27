@@ -5,7 +5,7 @@
 package mocks
 
 import (
-	models "github.com/amoriartyCH/accounts-statistics-tool/models"
+	models "github.com/companieshouse/innovation-accounts-statistics-tool/models"
 	gomock "github.com/golang/mock/gomock"
 	mongo "go.mongodb.org/mongo-driver/mongo"
 	options "go.mongodb.org/mongo-driver/mongo/options"

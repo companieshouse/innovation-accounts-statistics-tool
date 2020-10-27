@@ -1,4 +1,4 @@
-module github.com/amoriartyCH/accounts-statistics-tool
+module github.com/companieshouse/innovation-accounts-statistics-tool
 
 go 1.12
 

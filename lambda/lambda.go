@@ -1,9 +1,9 @@
 package lambda
 
 import (
-	"github.com/amoriartyCH/accounts-statistics-tool/aws"
-	"github.com/amoriartyCH/accounts-statistics-tool/config"
-	"github.com/amoriartyCH/accounts-statistics-tool/service"
+	"github.com/companieshouse/innovation-accounts-statistics-tool/aws"
+	"github.com/companieshouse/innovation-accounts-statistics-tool/config"
+	"github.com/companieshouse/innovation-accounts-statistics-tool/service"
 	log "github.com/sirupsen/logrus"
 )
 

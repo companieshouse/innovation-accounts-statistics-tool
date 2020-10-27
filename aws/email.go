@@ -3,11 +3,11 @@ package aws
 import (
 	"bytes"
 	encsv "encoding/csv"
-	c "github.com/amoriartyCH/accounts-statistics-tool/config"
-	"github.com/amoriartyCH/accounts-statistics-tool/models"
-	amaws"github.com/aws/aws-sdk-go/aws"
+	amaws "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ses"
+	c "github.com/companieshouse/innovation-accounts-statistics-tool/config"
+	"github.com/companieshouse/innovation-accounts-statistics-tool/models"
 	"gopkg.in/gomail.v2"
 	"io"
 )
