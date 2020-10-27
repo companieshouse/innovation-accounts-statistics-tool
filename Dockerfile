@@ -19,6 +19,6 @@ ENV RECEIVER_EMAIL=$receiver_email
 
 WORKDIR /app
 COPY . .
-RUN GO111MODULE=on go build
+RUN make
 
 ENTRYPOINT ["/app/accounts-statistics-tool"]
