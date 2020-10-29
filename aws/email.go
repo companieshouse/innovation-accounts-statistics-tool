@@ -38,7 +38,7 @@ func NewEmailGenerator(cfg *c.Config) EmailGenerator {
 func (eg *Impl) GenerateEmail(csv *models.CSV) error {
 
 	sess, err := session.NewSession(&amaws.Config{
-		Region: amaws.String(eg.cfg.AwsRegion)},
+		Region: amaws.String(eg.cfg.SesAwsRegion)},
 	)
 	if err != nil {
 		return err
