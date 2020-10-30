@@ -16,7 +16,7 @@ TRANSACTIONS_MONGODB_URL      | &#x2713; | mongodb://localhost:27017/|        | 
 TRANSACTIONS_MONGODB_DATABASE | &#x2713; | users_application         |        |
 LOG_LEVEL                     | &#x2717; | debug                     | info   | A lower case representation of the standard log level enumerations. Possible values can be found [here](https://github.com/sirupsen/logrus/blob/master/logrus.go#L25)
 SENDER_EMAIL                  | &#x2713; | example@provider.co.uk    |        | This variable must be on the AWS authorised list
-RECEIVER_EMAIL                | &#x2713; | example@provider.co.uk    |        | This variable must be on the AWS authorised list
+RECEIVER_EMAILS               | &#x2713; | example@provider.co.uk,another@provider.co.uk    |        | These variables must be on the AWS authorised list and be separated by commas with no spaces
 SES_AWS_REGION                | &#x2713; | eu-west-1                 |        | This variable must be a valid AWS region
 
 ### Building and running
