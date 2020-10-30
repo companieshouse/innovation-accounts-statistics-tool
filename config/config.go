@@ -15,7 +15,7 @@ type Config struct {
 	TransactionsMongoDBDatabase string `env:"TRANSACTIONS_MONGODB_DATABASE"  flag:"transactions-mongodb-database"  flagDesc:"Transactions MongoDB database for data"`
 	LogLevel                    string `env:"LOG_LEVEL"                      flag:"log-level"                      flagDesc:"Logging level of the application"`
 	SenderEmail                 string `env:"SENDER_EMAIL"                   flag:"sender-email"                   flagDesc:"Email of Sender"`
-	ReceiverEmail               string `env:"RECEIVER_EMAIL"                 flag:"receiver-email"                 flagDesc:"Email of Receiver"`
+	ReceiverEmails              string `env:"RECEIVER_EMAILS"                flag:"receiver-emails"                flagDesc:"Emails of each Receiver"`
 	SesAwsRegion                string `env:"SES_AWS_REGION"                 flag:"ses-aws-region"                 flagDesc:"AWS Region"`
 }
 
@@ -57,8 +57,8 @@ func Get() (*Config, error) {
 		mandatoryConfigsMissing = true
 	}
 
-	if cfg.ReceiverEmail == "" {
-		log.Warn("RECEIVER_EMAIL not set in environment")
+	if cfg.ReceiverEmails == "" {
+		log.Warn("RECEIVER_EMAILS not set in environment")
 		mandatoryConfigsMissing = true
 	}
 
