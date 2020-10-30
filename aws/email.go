@@ -10,6 +10,7 @@ import (
 	"github.com/companieshouse/innovation-accounts-statistics-tool/models"
 	"gopkg.in/gomail.v2"
 	"io"
+	"strings"
 )
 
 const (
@@ -37,6 +38,12 @@ func NewEmailGenerator(cfg *c.Config) EmailGenerator {
 // GenerateEmail is a method used to send an email using amazon's Golang sdk.
 func (eg *Impl) GenerateEmail(csv *models.CSV) error {
 
+	rEmails := make([]*string, 0)
+	envEmails := strings.Split(eg.cfg.ReceiverEmails, ",")
+	for i := 0; i < len(envEmails); i++ {
+		rEmails = append(rEmails, &envEmails[i])
+	}
+
 	sess, err := session.NewSession(&amaws.Config{
 		Region: amaws.String(eg.cfg.SesAwsRegion)},
 	)
@@ -48,7 +55,6 @@ func (eg *Impl) GenerateEmail(csv *models.CSV) error {
 
 	msg := gomail.NewMessage()
 	msg.SetHeader("From", eg.cfg.SenderEmail)
-	msg.SetHeader("To", eg.cfg.ReceiverEmail)
 	msg.SetHeader("Subject", subject)
 
 	msg.SetBody("text/html", body)
@@ -67,7 +73,7 @@ func (eg *Impl) GenerateEmail(csv *models.CSV) error {
 
 	message := ses.RawMessage{Data: emailRaw.Bytes()}
 
-	input := ses.SendRawEmailInput{RawMessage: &message}
+	input := ses.SendRawEmailInput{Destinations: rEmails, RawMessage: &message}
 	_, err = svc.SendRawEmail(&input)
 	if err != nil {
 		return err
